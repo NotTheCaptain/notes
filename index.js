@@ -1,6 +1,17 @@
-console.log("Hello World");
+const input = document.getElementById("text");
+input.addEventListener("keydown", handleKeyDown);
 
-function addNote() {
+function handleClick() {
+  add();
+}
+
+function handleKeyDown(event) {
+  if (event.key === "Enter") {
+    add();
+  }
+}
+
+function add() {
   const input = document.getElementById("text");
   const text = input.value;
   if (text) {
