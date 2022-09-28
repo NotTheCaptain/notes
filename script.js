@@ -11,5 +11,6 @@ function addNote() {
     ul.appendChild(li);
 
     input.value = "";
+    input.focus();
   }
 }
