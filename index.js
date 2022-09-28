@@ -65,8 +65,7 @@ function createNote(title, text) {
 }
 
 function generateId(title, text, length = 10) {
-  return CryptoJS.SHA256(title * text * new Date()).toString.substring(
-    0,
-    length
-  );
+  return CryptoJS.SHA256(title + text + new Date())
+    .toString()
+    .substring(0, length);
 }
