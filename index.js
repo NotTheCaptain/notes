@@ -49,7 +49,7 @@ function add() {
   const title = document.getElementById("title");
   const text = document.getElementById("text");
   if (title.value || text.value) {
-    const list = document.getElementById("id");
+    const list = document.getElementById("list");
     const note = createNote(title.value, text.value);
     const item = buildLIItem(note);
     list.appendChild(item);
