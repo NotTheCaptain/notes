@@ -13,19 +13,10 @@ function buildLIItem(text) {
 document.addEventListener("DOMContentLoaded", function () {
   const button = document.getElementById("add");
   button.addEventListener("click", handleClick);
-
-  const input = document.getElementById("text");
-  input.addEventListener("keydown", handleKeyDown);
 });
 
 function handleClick() {
   add();
-}
-
-function handleKeyDown(event) {
-  if (event.key === "Enter") {
-    add();
-  }
 }
 
 function handleClickLIItem(event) {

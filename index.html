@@ -11,17 +11,39 @@
       <div>
         <input
           type="text"
-          id="text"
-          name="text"
-          autofocus
-          placeholder="Enter note ..."
+          id="title"
+          name="title"
+          placeholder="Title"
+          spellcheck="false"
         />
-        <button id="add">Add</button>
+        <textarea
+          name="text"
+          id="text"
+          rows="6"
+          type="text"
+          placeholder="Enter note ..."
+          spellcheck="false"
+        ></textarea>
+        <div>
+          <button id="add">Add</button>
+        </div>
       </div>
       <ul id="list">
-        <li>Note 1</li>
-        <li>Note 2</li>
-        <li>Note 3</li>
+        <li id="93949df9393">
+          <div>Title 1</div>
+          <div>Note 1</div>
+          <div><button>Delete</button></div>
+        </li>
+        <li id="7993jdf03030">
+          <div>Title 2</div>
+          <div>Note 2</div>
+          <div><button>Delete</button></div>
+        </li>
+        <li id="6202303jfdjdk93">
+          <div>Title 3</div>
+          <div>Note 3</div>
+          <div><button>Delete</button></div>
+        </li>
       </ul>
     </main>
     <script src="./index.js"></script>
