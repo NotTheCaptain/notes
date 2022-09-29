@@ -82,6 +82,19 @@ function registerEventHandlers() {
   button.addEventListener("click", handleClick);
 }
 
+function registerServiceWorker() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/notes/sw.js", { scope: "/notes/" })
+      .then((registration) =>
+        console.log("Service Worker registered!", registration)
+      )
+      .catch((error) =>
+        console.log("Service Worker registration failed!", error)
+      );
+  }
+}
+
 function load() {
   notes = JSON.parse(localStorage.getItem("notes")) || [];
 }
