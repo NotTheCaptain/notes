@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Notes in Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <script
+      crossorigin="anonymous"
+      integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+      referrerpolicy="no-referrer"
+      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+    ></script>
+    <link href="style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="notes">
+      <main id="app">
+        <div class="input">
+          <input
+            class="input__title"
+            autofocus
+            id="title"
+            name="title"
+            placeholder="Title"
+            type="text"
+            v-model="title"
+            v-on:keydown.enter="add"
+            ref="input"
+          />
+          <textarea
+            class="input__text"
+            id="text"
+            name="note"
+            placeholder="Enter note ..."
+            rows="6"
+            v-model="text"
+            v-on:keydown.enter="add"
+          ></textarea>
+          <div class="input__controls">
+            <button class="input__controls__add" @click="add">
+              <i class="fas fa-plus fa-2x"></i>
+            </button>
+          </div>
+        </div>
+        <ul class="notes">
+          <li v-for="note in notes" class="note">
+            <article>
+              <input type="checkbox" v-model="note.done" />
+              <header class="note__title" :class="{ done: note.done }">
+                {{ note.title}}
+              </header>
+              <p class="note__text" :class="{ done: note.done }">
+                {{ note.text }}
+              </p>
+              <div class="note__controls">
+                <button
+                  class="note__controls__delete"
+                  @click="removeNote(note)"
+                >
+                  <i class="fas fa-trash fa-2x"></i>
+                </button>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </main>
+    </div>
+  </body>
+
+  <script>
+    new Vue({
+      el: "#notes",
+      data: {
+        title: "",
+        text: "",
+        id: "",
+        notes: [],
+      },
+      methods: {
+        add: function () {
+          if (this.title && this.text) {
+            this.id = this.generateId(this.title, this.text);
+            this.notes.push({
+              id: this.id,
+              title: this.title,
+              text: this.text,
+              done: false,
+            });
+            this.save();
+            this.title = "";
+            this.text = "";
+            this.$refs.input.focus();
+          }
+        },
+        load: function () {
+          this.notes = JSON.parse(localStorage.getItem("notes")) || [];
+        },
+        save: function () {
+          localStorage.setItem("notes", JSON.stringify(this.notes));
+        },
+        removeNote: function (note) {
+          this.notes = this.notes.filter((n) => n !== note);
+          this.save();
+        },
+        generateId: function (title, text, length = 10) {
+          return CryptoJS.SHA256(title + text + new Date())
+            .toString()
+            .substring(0, length);
+        },
+      },
+      mounted() {
+        this.load();
+      },
+    });
+  </script>
+</html>

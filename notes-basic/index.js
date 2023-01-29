@@ -121,7 +121,7 @@ function registerServiceWorker() {
       refreshing = true;
     });
     navigator.serviceWorker
-      .register("/notes/sw.js", { scope: "/notes/" })
+      .register("/notes/notes-basic/sw.js", { scope: "/notes/notes-basic/" })
       .then((registration) => handleRegistration(registration))
       .catch((error) =>
         console.log("Service Worker registration failed!", error)
